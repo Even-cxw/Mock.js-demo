@@ -27,10 +27,34 @@ server.get('/api/room/:id/switch', (req, res) => {
         }
       });
   } else {
-      res.status(404).json({ error: 'Room not found' });
+    res.json({
+      code: -1,
+      scu: false,
+      msg: 'roomId不存在',
+      data: '',
+    })
   }
 });
 
+
+server.post('/api/mock/login', (req, res) => {
+  const { userName, pwd} = req.body;
+  if (userName === 'admin' && pwd === '123456') {
+      res.json({
+        code: 200,
+        res: {
+          token: 'xxxxxx'
+        }
+      })
+  } else {
+      res.json({
+        code: -1,
+        scu: false,
+        msg: '用户名或密码错误111',
+        data: '',
+      })
+  }
+});
 
 server.post('/api/roomsInfo/getRoomById', (req, res) => {
   const { id } = req.body;
@@ -43,7 +67,12 @@ server.post('/api/roomsInfo/getRoomById', (req, res) => {
         }
       });
   } else {
-      res.status(404).json({ error: 'Room not found' });
+      res.json({
+        code: -1,
+        scu: false,
+        msg: '请求id不存在',
+        data: '',
+      })
   }
 });
 
@@ -62,7 +91,12 @@ server.post('/api/room/update', (req, res) => {
         }
       });
   } else {
-      res.status(404).json({ error: 'Room not found' });
+    res.json({
+      code: -1,
+      scu: false,
+      msg: '请求room-id不存在',
+      data: '',
+    })
   }
 });
 
